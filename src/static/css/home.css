@@ -1,185 +1,325 @@
+/* Ultra-modern CSS for Task Manager Home Page */
 :root {
-    --primary-color: #4f46e5;
-    --primary-hover: #4338ca;
-    --secondary-color: #10b981;
-    --secondary-hover: #059669;
-    --error-color: #ef4444;
-    --text-color: #1f2937;
-    --text-light: #6b7280;
-    --background: #ffffff;
-    --input-bg: #f9fafb;
-    --input-border: #e5e7eb;
-    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --radius: 8px;
-  }
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  --secondary-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --bg-gradient: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --accent: #8b5cf6;
+  --accent-hover: #7c3aed;
+  --danger: #ef4444;
+  --success: #10b981;
+  --border-radius: 12px;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --transition: all 0.3s ease;
+}
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  }
-  
-  body {
-    background-color: #f3f4f6;
-    color: var(--text-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236366f1' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: -1;
+}
+
+header {
+  background: var(--primary-gradient);
+  color: white;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: white;
+  clip-path: ellipse(50% 50% at 50% 0%);
+  z-index: 1;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.025em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+  font-size: 1.125rem;
+  font-weight: 400;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+section {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  padding: 2.5rem;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl), 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+  color: var(--text-primary);
+}
+
+p {
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+}
+
+ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 1.0625rem;
+  transition: var(--transition);
+}
+
+li:hover {
+  transform: translateX(5px);
+}
+
+li::before {
+  content: "✓";
+  color: var(--success);
+  font-weight: bold;
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-right: 0.75rem;
+  background: rgba(16, 185, 129, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+  position: relative;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--accent-hover);
+}
+
+a:hover::after {
+  width: 100%;
+}
+
+/* Special styling for action links */
+div a {
+  display: inline-block;
+  margin-right: 1.5rem;
+  margin-top: 0.75rem;
+}
+
+/* Task action links */
+a[href^="/tasks"] {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+a[href^="/tasks"]::before {
+  content: "→";
+  margin-right: 0.5rem;
+  transition: var(--transition);
+}
+
+a[href^="/tasks"]:hover::before {
+  transform: translateX(3px);
+}
+
+/* Logout link styling */
+a[href="/logout"] {
+  display: inline-block;
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  margin-top: 1.5rem;
+  font-weight: 600;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+a[href="/logout"]:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+}
+
+a[href="/logout"]::after {
+  display: none;
+}
+
+/* Login and register links styling */
+a[href="/login"], a[href="/register"] {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+a[href="/login"]:hover, a[href="/register"]:hover {
+  color: var(--accent-hover);
+}
+
+/* Button-like links */
+a[href="/register"] {
+  display: inline-block;
+  background: var(--primary-gradient);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 30px;
+  margin-top: 0.5rem;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+}
+
+a[href="/register"]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+a[href="/register"]::after {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+  main {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   }
   
   header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 2rem 1rem;
-    text-align: center;
+    padding: 4rem 2rem;
   }
   
   header h1 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-size: 3rem;
   }
-  
-  header p {
-    font-size: 1rem;
-    opacity: 0.9;
+}
+
+
+
+/* Animation for page load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  main {
-    flex: 1;
-    padding: 2rem 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  section {
-    background-color: var(--background);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 2rem;
-    margin-bottom: 2rem;
-  }
-  
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: var(--text-color);
-  }
-  
-  h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    margin-top: 1.5rem;
-    color: var(--text-color);
-  }
-  
-  p {
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    color: var(--text-light);
-  }
-  
-  ul {
-    list-style-type: none;
-    margin-bottom: 1.5rem;
-  }
-  
-  li {
-    padding: 0.5rem 0;
-    display: flex;
-    align-items: center;
-  }
-  
-  li:before {
-    content: "•";
-    color: var(--primary-color);
-    font-weight: bold;
-    display: inline-block;
-    width: 1em;
-    margin-right: 0.5rem;
-  }
-  
-  a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.15s ease;
-  }
-  
-  a:hover {
-    color: var(--primary-hover);
-    text-decoration: underline;
-  }
-  
-  /* Special styling for action links */
-  div a {
-    display: inline-block;
-    margin-right: 1rem;
-    margin-top: 0.5rem;
-  }
-  
-  /* Logout link styling */
-  a[href="/logout"] {
-    display: inline-block;
-    background-color: #f3f4f6;
-    color: var(--text-color);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius);
-    margin-top: 1rem;
-    transition: background-color 0.15s ease;
-  }
-  
-  a[href="/logout"]:hover {
-    background-color: #e5e7eb;
-    text-decoration: none;
-  }
-  
-  /* Login and register links styling */
-  a[href="/login"], a[href="/register"] {
-    font-weight: 600;
-  }
-  
-  /* Task action links */
-  a[href^="/tasks"] {
-    color: var(--secondary-color);
-  }
-  
-  a[href^="/tasks"]:hover {
-    color: var(--secondary-hover);
-  }
-  
-  footer {
-    text-align: center;
-    padding: 1.5rem;
-    background-color: var(--background);
-    color: var(--text-light);
-    font-size: 0.875rem;
-    margin-top: auto;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 640px) {
-    header {
-      padding: 1.5rem 1rem;
-    }
-    
-    header h1 {
-      font-size: 1.75rem;
-    }
-    
-    section {
-      padding: 1.5rem;
-    }
-    
-    h2 {
-      font-size: 1.25rem;
-    }
-    
-    h3 {
-      font-size: 1.125rem;
-    }
-  }
+}
+
+section {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+section:nth-child(2) {
+  animation-delay: 0.2s;
+}

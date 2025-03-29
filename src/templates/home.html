@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,46 +7,45 @@
 </head>
 <body>
     <header>
-        <h1>Task Manager</h1>
-        <p>Your personal to-do list application</p>
+        <h1>Gestionnaire de Tâches</h1>
+        <p>Votre application personnelle de liste de choses à faire</p>
     </header>
 
     <main>
         {% if username %}
             <section>
-                <h2>Welcome, {{username}}!</h2>
-                <p>You are logged in and ready to manage your tasks.</p>
+                <h2>Bienvenue, {{username}} !</h2>
+                <p>Vous êtes connecté(e) et prêt(e) à gérer vos tâches.</p>
                 
                 <div>
-                    <h3>What would you like to do?</h3>
+                    <h3>Que souhaitez-vous faire ?</h3>
                     <ul>
-                        <li><a href="/tasks">View my tasks</a></li>
-                        <li><a href="/tasks/add">Add a new task</a></li>
-                        <li><a href="/profile">My profile</a></li>
+                        <li><a href="/tasks">Voir mes tâches</a></li>
+                        <li><a href="/tasks/add">Ajouter une nouvelle tâche</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <a href="/logout">Logout</a>
+                    <a href="/logout">Déconnexion</a>
                 </div>
             </section>
         {% else %}
             <section>
-                <h2>Welcome to Task Manager</h2>
-                <p>You are not logged in. Please <a href="/login">login</a> to access your tasks.</p>
+                <h2>Bienvenue sur Gestionnaire de Tâches</h2>
+                <p>Vous n'êtes pas connecté(e). Veuillez <a href="/login">vous connecter</a> pour accéder à vos tâches.</p>
                 
                 <div>
-                    <p>New user? <a href="/register">Create an account</a> to get started.</p>
+                    <p>Nouvel utilisateur ? <a href="/register">Créez un compte</a> pour commencer.</p>
                 </div>
             </section>
             
             <section>
-                <h3>With Task Manager you can:</h3>
+                <h3>Avec Gestionnaire de Tâches vous pouvez :</h3>
                 <ul>
-                    <li>Add and organize your daily tasks</li>
-                    <li>Mark tasks as completed</li>
-                    <li>Delete tasks you no longer need</li>
-                    <li>Filter tasks by status (completed/in progress)</li>
+                    <li>Ajouter et organiser vos tâches quotidiennes</li>
+                    <li>Marquer les tâches comme terminées</li>
+                    <li>Supprimer les tâches dont vous n'avez plus besoin</li>
+                    <li>Filtrer les tâches par statut (terminé/en cours)</li>
                 </ul>
             </section>
         {% endif %}
