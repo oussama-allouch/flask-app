@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Task Manager</h1>
+        <p>Your personal to-do list application</p>
+    </header>
+
+    <main>
+        {% if username %}
+            <section>
+                <h2>Welcome, {{username}}!</h2>
+                <p>You are logged in and ready to manage your tasks.</p>
+                
+                <div>
+                    <h3>What would you like to do?</h3>
+                    <ul>
+                        <li><a href="/tasks">View my tasks</a></li>
+                        <li><a href="/tasks/add">Add a new task</a></li>
+                        <li><a href="/profile">My profile</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <a href="/logout">Logout</a>
+                </div>
+            </section>
+        {% else %}
+            <section>
+                <h2>Welcome to Task Manager</h2>
+                <p>You are not logged in. Please <a href="/login">login</a> to access your tasks.</p>
+                
+                <div>
+                    <p>New user? <a href="/register">Create an account</a> to get started.</p>
+                </div>
+            </section>
+            
+            <section>
+                <h3>With Task Manager you can:</h3>
+                <ul>
+                    <li>Add and organize your daily tasks</li>
+                    <li>Mark tasks as completed</li>
+                    <li>Delete tasks you no longer need</li>
+                    <li>Filter tasks by status (completed/in progress)</li>
+                </ul>
+            </section>
+        {% endif %}
+    </main>
+
+</body>
+</html>

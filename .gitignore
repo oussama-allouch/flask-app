@@ -1,0 +1,10 @@
+.env
+config.py
+instance/config.py
+logs/
+*.log
+*.pyc
+__pycache__/
+.vscode/
+.idea/
+venv/
