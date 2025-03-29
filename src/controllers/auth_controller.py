@@ -1,20 +1,18 @@
 from flask import request, session, redirect, url_for, render_template
+from models.user_model import UserModel
 
 class AuthController:
     def __init__(self, mysql):
-        self.mysql = mysql
+        self.user_model = UserModel(mysql)
     
     def handle_login(self):
         if request.method == 'POST':
             username = request.form['username']
             pwd = request.form['password']
-            cur = self.mysql.connection.cursor()
-            cur.execute("SELECT username, password FROM users WHERE username = %s", (username,))
-            user = cur.fetchone()
-            cur.close()
+            user = self.user_model.get_user_by_username(username)
             
-            if user and pwd == user[1]:
-                session['username'] = user[0]
+            if user and pwd == user[3]:  # Le mot de passe est à l'index 3 maintenant
+                session['username'] = user[1]  # Le username est à l'index 1
                 return redirect(url_for('main.home'))
             
             return render_template('login.html', error='Invalid credentials')
@@ -27,14 +25,7 @@ class AuthController:
             email = request.form['email']
             pwd = request.form['password']
             
-            cur = self.mysql.connection.cursor()
-            cur.execute("""
-                INSERT INTO users (username, email, password) 
-                VALUES (%s, %s, %s)
-            """, (username, email, pwd))
-            self.mysql.connection.commit()
-            cur.close()
-            
+            self.user_model.create_user(username, email, pwd)
             return redirect(url_for('auth.login'))
         
         return render_template('register.html')
